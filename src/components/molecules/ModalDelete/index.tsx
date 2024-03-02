@@ -10,7 +10,6 @@ const ModalDelete = ({ setIsOpen, title, onDelete }: any) => {
   };
 
   const handleDelete = () => {
-    console.log("delete");
     onDelete();
     handleClose();
   };

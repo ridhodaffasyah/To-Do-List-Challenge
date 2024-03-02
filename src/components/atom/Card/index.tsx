@@ -1,8 +1,13 @@
 import CardProps from "../../../utils/interface";
+import { Link } from "react-router-dom";
 
-const Card = ({ title, date, onModal }: CardProps) => {
+const Card = ({ id, title, date, onModal }: CardProps) => {
   return (
-      <div data-cy="activity-item" className="bg-white hover:bg-slate-100 hover:cursor-pointer w-full sm:w-[49.2%] lg:w-[23.88%] shadow-md drop-shadow flex flex-col justify-between p-5 rounded-xl gap-20">
+    <Link
+      to={`/detail/${id}`}
+      data-cy="activity-item"
+      className="bg-white hover:bg-slate-100 hover:cursor-pointer w-full sm:w-[49.2%] lg:w-[23.88%] shadow-md drop-shadow flex flex-col justify-between p-5 rounded-xl gap-20"
+    >
       <h1 className="font-bold text-[18px]" data-cy="activity-item-title">
         {title}
       </h1>
@@ -17,7 +22,7 @@ const Card = ({ title, date, onModal }: CardProps) => {
           />
         </button>
       </div>
-    </div>
+    </Link>
   );
 };
 
