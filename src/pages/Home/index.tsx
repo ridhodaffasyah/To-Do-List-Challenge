@@ -136,14 +136,16 @@ const Home = () => {
           })}
         </div>
       </Layout>
-      {isModalOpen && (
+      {isModalOpen ? (
         <ModalDelete
           setIsOpen={setIsModalOpen}
           title={selectedTitle}
           onDelete={() => handleDeleteAct(selectedId)}
         />
+      ) : (
+        <div data-cy="modal-delete"></div>
       )}
-      {isDeleted && <Alert />}
+      {isDeleted ? <Alert /> : <div data-cy="modal-information"></div>}
     </div>
   );
 };
