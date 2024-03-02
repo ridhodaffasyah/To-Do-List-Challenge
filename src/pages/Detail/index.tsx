@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Layout from "../../components/layout";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { ModalTitle } from "../../components/molecules";
 
 const Detail = () => {
@@ -8,6 +8,7 @@ const Detail = () => {
   const [title, setTitle] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const fecthDetail = async () => {
     const fetchDetail = await fetch(
@@ -61,8 +62,9 @@ const Detail = () => {
             <img
               src="/assets/todo-back-button.png"
               alt="todo-back-icon"
-              className="w-[32px]"
+              className="w-[32px] hover:cursor-pointer"
               data-cy="todo-back-button"
+              onClick={() => navigate(-1)}
             />
             <div
               className="flex w-full items-center gap-4 hover:cursor-pointer"
