@@ -1,10 +1,15 @@
 import Layout from "./components/layout";
-import { Card } from "./components/atom";
+import { Card, Alert } from "./components/atom";
 import { useEffect, useState } from "react";
+import { ModalDelete } from "./components/molecules";
 
 const App = () => {
   const [list, setList] = useState([]);
   const [isEmpty, setIsEmpty] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleted, setIsDeleted] = useState(false);
+  const [selectedId, setSelectedId] = useState(0);
+  const [selectedTitle, setSelectedTitle] = useState("");
 
   const fetchList = async () => {
     const fetchList = await fetch(
@@ -63,6 +68,29 @@ const App = () => {
     setList(updatedList);
   };
 
+  const handleOpenModal = (id:number, title: any) => {
+    setIsModalOpen(true);
+    setSelectedTitle(title);
+    setSelectedId(id);
+  };
+
+  const handleDeleteAct = async (id: number) => {
+    await fetch(`https://todo.api.devcode.gethired.id/activity-groups/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const updatedList = await fetchList();
+    setList(updatedList);
+
+    setIsDeleted(true);
+    setTimeout(() => {
+      setIsDeleted(false);
+    }, 2000);
+  };
+
   return (
     <div>
       <Layout>
@@ -94,19 +122,27 @@ const App = () => {
             />
           </div>
         )}
-        <div className="flex flex-wrap gap-4 mt-6 items-center">
-          {list?.map((item: any, index: number) => {
+        <div className="w-full flex flex-col md:flex-row flex-wrap gap-2 mt-6 items-center">
+          {list?.map((item: any) => {
             return (
               <Card
                 key={item.id}
-                idx={index}
                 title={item.title}
                 date={formatDate(item.created_at)}
+                onModal={() => handleOpenModal(item.id, item.title)}
               />
             );
           })}
         </div>
       </Layout>
+      {isModalOpen && (
+        <ModalDelete
+          setIsOpen={setIsModalOpen}
+          title={selectedTitle}
+          onDelete={() => handleDeleteAct(selectedId)}
+        />
+      )}
+      {isDeleted && <Alert />}
     </div>
   );
 };
