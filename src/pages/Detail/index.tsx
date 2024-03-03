@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import Layout from "../../components/layout";
 import { useParams, useNavigate } from "react-router-dom";
-import { ModalTitle } from "../../components/molecules";
+import { ModalTitle, ModalToDo } from "../../components/molecules";
 
 const Detail = () => {
   const [detail, setDetail] = useState<any>({});
   const [title, setTitle] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalTitleOpen, setIsModalTitleOpen] = useState(false);
+  const [isModalAddOpen, setIsModalAddOpen] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -33,8 +34,12 @@ const Detail = () => {
     getDetail();
   }, []);
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
+  const handleOpenModalTitle = () => {
+    setIsModalTitleOpen(true);
+  };
+
+  const handleOpenModalAdd = () => {
+    setIsModalAddOpen(true);
   };
 
   const handleEditTitle = async (id: number, newTitle: string) => {
@@ -69,7 +74,7 @@ const Detail = () => {
             <h1
               data-cy="todo-title"
               className="font-bold text-[36px] text-black hover:cursor-pointer"
-              onClick={() => { handleOpenModal();
+              onClick={() => { handleOpenModalTitle();
               }}
             >
               {detail?.title}
@@ -80,13 +85,16 @@ const Detail = () => {
               className="w-[24px] hover:cursor-pointer"
               data-cy="todo-title-edit-button"
               onClick={() => {
-                handleOpenModal();
+                handleOpenModalTitle();
               }}
             />
           </div>
           <button
             data-cy="todo-add-button"
             className="flex w-[30%] md:w-[20%] xl:w-[12%] p-2 lg:p-3 rounded-full bg-[#16ABF8] text-white text-[10px] md:text-[14px] lg:text-base font-semibold gap-[6px] items-center justify-center hover:bg-blue-500"
+            onClick={() => {
+              handleOpenModalAdd();
+            }}
           >
             <span>+</span>
             <span>Tambah</span>
@@ -105,13 +113,17 @@ const Detail = () => {
           </div>
         )}
       </Layout>
-      {isModalOpen && (
+      {isModalTitleOpen && (
         <ModalTitle
           id={id}
           title={title}
           setTitle={setTitle}
-          setIsModalOpen={setIsModalOpen}
+          setIsModalOpen={setIsModalTitleOpen}
           handleEditTitle={handleEditTitle}
+        />
+      )}
+      {isModalAddOpen && (
+        <ModalToDo
         />
       )}
     </div>
