@@ -68,11 +68,8 @@ const Detail = () => {
             />
             <h1
               data-cy="todo-title"
-              className="font-bold text-[36px] text-black hover:cursor-pointer pr-4"
-              onClick={() => {
-                const newTitle =
-                  prompt("Enter a new title", detail?.title) ?? detail?.title;
-                handleEditTitle(Number(id), newTitle);
+              className="font-bold text-[36px] text-black hover:cursor-pointer"
+              onClick={() => { handleOpenModal();
               }}
             >
               {detail?.title}
@@ -83,9 +80,7 @@ const Detail = () => {
               className="w-[24px] hover:cursor-pointer"
               data-cy="todo-title-edit-button"
               onClick={() => {
-                const newTitle =
-                  prompt("Enter a new title", detail?.title) ?? detail?.title;
-                handleEditTitle(Number(id), newTitle);
+                handleOpenModal();
               }}
             />
           </div>
@@ -110,7 +105,7 @@ const Detail = () => {
           </div>
         )}
       </Layout>
-      {/* {isModalOpen && (
+      {isModalOpen && (
         <ModalTitle
           id={id}
           title={title}
@@ -118,7 +113,7 @@ const Detail = () => {
           setIsModalOpen={setIsModalOpen}
           handleEditTitle={handleEditTitle}
         />
-      )} */}
+      )}
     </div>
   );
 };
