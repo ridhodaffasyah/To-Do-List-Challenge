@@ -1,15 +1,16 @@
 import CardProps from "../../../utils/interface";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Card = ({ id, title, date, onModal }: CardProps) => {
+  const navigate = useNavigate();
   return (
     <div
       data-cy="activity-item"
       className="bg-white hover:bg-slate-100 hover:cursor-pointer w-full flex justify-between sm:w-[49.2%] lg:w-[23.88%] shadow-md drop-shadow rounded-xl"
     >
-      <Link
-        to={`/detail/${id}`}
+      <div
         className="flex flex-col justify-between p-5 gap-20"
+        onClick={() => navigate(`/detail/${id}`)}
       >
         <h1 className="font-bold text-[18px]" data-cy="activity-item-title">
           {title}
@@ -17,7 +18,7 @@ const Card = ({ id, title, date, onModal }: CardProps) => {
         <div className="flex justify-between items-center">
           <span data-cy="activity-item-date">{date}</span>
         </div>
-      </Link>
+      </div>
 
       <div className="flex justify-end w-[12%] items-end pb-6 mr-3">
         <button onClick={onModal}>
