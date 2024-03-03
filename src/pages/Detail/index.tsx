@@ -58,35 +58,36 @@ const Detail = () => {
     <div>
       <Layout>
         <div className="flex w-full justify-between items-center">
-          <div className="flex justify-between items-center gap-5">
+          <div className="flex justify-between items-center">
             <img
               src="/assets/todo-back-button.png"
               alt="todo-back-icon"
-              className="w-[32px] hover:cursor-pointer"
+              className="w-[32px] hover:cursor-pointer mr-4"
               data-cy="todo-back-button"
               onClick={() => navigate(-1)}
             />
-            <div
-              className="flex w-full items-center gap-4 hover:cursor-pointer"
+            <h1
+              data-cy="todo-title"
+              className="font-bold text-[36px] text-black hover:cursor-pointer pr-4"
               onClick={() => {
-                const newTitle = prompt("Enter a new title",  detail?.title) ?? detail?.title;
+                const newTitle =
+                  prompt("Enter a new title", detail?.title) ?? detail?.title;
                 handleEditTitle(Number(id), newTitle);
               }}
-              data-cy="todo-title"
             >
-              <h1
-                data-cy="todo-title"
-                className="font-bold text-[36px] text-black"
-              >
-                {detail?.title}
-              </h1>
-              <img
-                src="/assets/todo-title-edit-button.png"
-                alt="todo-title-edit-icon"
-                className="w-[24px]"
-                data-cy="todo-title-edit-button"
-              />
-            </div>
+              {detail?.title}
+            </h1>
+            <img
+              src="/assets/todo-title-edit-button.png"
+              alt="todo-title-edit-icon"
+              className="w-[24px] hover:cursor-pointer"
+              data-cy="todo-title-edit-button"
+              onClick={() => {
+                const newTitle =
+                  prompt("Enter a new title", detail?.title) ?? detail?.title;
+                handleEditTitle(Number(id), newTitle);
+              }}
+            />
           </div>
           <button
             data-cy="todo-add-button"
