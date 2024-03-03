@@ -124,6 +124,7 @@ const Detail = () => {
       )}
       {isModalAddOpen && (
         <ModalToDo
+          setIsModalAddOpen={setIsModalAddOpen}
         />
       )}
     </div>

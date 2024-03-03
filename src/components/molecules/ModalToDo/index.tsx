@@ -1,6 +1,6 @@
 import { CustomSelect } from "../../atom";
 
-const ModalToDo = () => {
+const ModalToDo = ({ setIsModalAddOpen }: any) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
       <div className="bg-white w-[50%] gap-4 flex flex-col rounded-xl">
@@ -29,9 +29,16 @@ const ModalToDo = () => {
             >
               PRIORITY
             </label>
-            <CustomSelect/>
+            <CustomSelect />
           </div>
-          <div className="flex justify-end mt-6 px-4">
+          <div className="flex justify-end mt-6 px-4 gap-4">
+            <button
+              className="bg-gray-300 text-white px-4 py-2 rounded-full w-[15%] hover:bg-red-500"
+              data-cy="modal-add-cancel-button"
+              onClick={() => setIsModalAddOpen(false)}
+            >
+              Batal
+            </button>
             <button
               className="bg-[#16ABF8] text-white px-4 py-2 rounded-full w-[15%] hover:bg-blue-500"
               data-cy="modal-add-save-button"
