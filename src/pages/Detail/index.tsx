@@ -51,7 +51,7 @@ const Detail = () => {
     // After the PATCH request is successful, re-fetch the list data
     const updatedDetail = await fecthDetail();
     setDetail(updatedDetail); // Update the detail state with the fetched data
-    setIsModalOpen(false);
+    // setIsModalOpen(false);
   };
 
   return (
@@ -69,8 +69,10 @@ const Detail = () => {
             <div
               className="flex w-full items-center gap-4 hover:cursor-pointer"
               onClick={() => {
-                handleOpenModal();
+                const newTitle = prompt("Enter a new title",  detail?.title) ?? detail?.title;
+                handleEditTitle(Number(id), newTitle);
               }}
+              data-cy="todo-title"
             >
               <h1
                 data-cy="todo-title"
@@ -107,7 +109,7 @@ const Detail = () => {
           </div>
         )}
       </Layout>
-      {isModalOpen && (
+      {/* {isModalOpen && (
         <ModalTitle
           id={id}
           title={title}
@@ -115,7 +117,7 @@ const Detail = () => {
           setIsModalOpen={setIsModalOpen}
           handleEditTitle={handleEditTitle}
         />
-      )}
+      )} */}
     </div>
   );
 };
